@@ -1,0 +1,121 @@
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    color: #777;
+}
+
+.wrapper {
+    margin: 50px;
+    text-align: center;
+    height: 10px 10px;
+    background-color: rebeccapurple;
+}
+
+
+.changeBg {
+    background-color: aquamarine;
+}
+
+header h2 {
+    padding-top: 20px;
+}
+
+input {
+    color: #777;
+    outline: none;
+    border: 1px solid #777;
+}
+
+input:focus {
+    border: 1px solid green;
+}
+
+#search-note {
+    border-bottom: 3px solid rebeccapurple;
+    height: 20px 100px;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    border-top: 50px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    background: gray;
+
+}
+
+ul {
+    list-style: none;
+    background-color: #dadaea;
+    margin-top: 22px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.note-list ul li {
+    text-align: left;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    padding: 10px 10px 0px 10px;
+    border-bottom: 2px solid gray;
+    border-left: 3px solid rgb(168, 168, 168);
+    background-color: #efefef;
+}
+
+.note-list ul li i {
+    display: inline;
+    margin: 0px 10px;
+}
+
+.note-list ul li input {
+    display: none;
+    padding: 5px 0;
+    width: 70%;
+    margin: 5px auto 0 auto;
+}
+
+#add-notes {
+    padding: 60px 0;
+}
+
+#hide-list {
+    margin-top: 20px;
+    margin-right: 350px;
+}
+
+#hide-list label {
+    padding: 5px 10px;
+    margin: 10px;
+    user-select: none;
+    border-bottom: 1px solid gray;
+}
+
+#hide-list label:hover {
+    background: #efefef;
+}
+
+#hide-list input[type='checkbox'] {
+    display: none;
+}
+
+form#add {
+    margin-top: 10px;
+    text-align: center;
+}
+
+form#add input {
+    border-radius: 2px;
+}
+
+form#add input[type='text'] {
+    padding: 5px 0 5px 2px;
+    width: 250px;
+}
+
+form#add input[type='submit'] {
+    padding: 5px 0;
+    width: 70px;
+    background: #6B8E23;
+    color: #fff;
+}
+
+form#add input[type='submit']:hover {
+    background: #7c9f34;
+}

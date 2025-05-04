@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+    <title>Random</title>
+    </head>
+
+    <body>
+        <%- include('partials/globeNavbar.ejs') %>
+            <h1>
+                Your random number is:<%= rand %>
+            </h1>
+            <%if(rand % 2===0){%>
+                <h2>That is an even number!</h2>
+                <% } else{ %>
+                    <h2>That is an odd number!</h2>
+                    <% }%>
+                        <%- include('partials/footer.ejs') %>

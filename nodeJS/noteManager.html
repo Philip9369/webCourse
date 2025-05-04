@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Manager</title>
+    <link rel="stylesheet" href="styleNM.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h2>Note Managers</h2>
+            <form id="search-note">
+                <input type="text" placeholder="Search note...">
+            </form>
+        </header>
+        <div class="note-list">
+            <ul id="list">
+                <li id="list-item">
+                    <p>First note</p>
+                    <p id="fonts-wrapper">
+                        <!-- <img src="Pencil.png" alt=""> -->
+                        <i class="fa fa-check"></i>
+                        <i class="fa fa-times"></i>
+                    </p>
+                    <input type="text" class="edit-note">
+                </li>
+                <li>
+                    <p>Second note</p>
+                    <p id="fonts-wrapper">
+                        <i class="fa fa-check"></i>
+                        <i class="fa fa-times"></i>
+                    </p>
+                    <input type="text" class="edit-note">
+                </li>
+                <li>
+                    <p>Third note</p>
+                    <p id="fonts-wrapper">
+                        <i class="fa fa-check"></i>
+                        <i class="fa fa-times"></i>
+                    </p>
+                    <input type="text" class="edit-note">
+                </li>
+            </ul>
+        </div>
+        <div id="hide-list">
+            <label for="hide">Hide notes</label>
+            <input type="checkbox" id="hide">
+        </div>
+        <div id="add-notes">
+            <form id="add">
+                <input type="text" placeholder="Add a note.." id="add-input">
+                <input type="submit" value="Add" id="add-btn">
+            </form>
+        </div>
+    </div>
+</body>
+<script src="Note Manager.js"></script>
+
+</html>
