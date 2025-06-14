@@ -34,7 +34,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/campgrounds", campgrounds);
 
 app.get("/", (req, res) => {
-  res.render("home");
+  return res.render("home");
 });
 
 app.post(
