@@ -2,18 +2,22 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
+const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const Campground = require("./models/campground");
 const Review = require("./models/review");
 
 const campgrounds = require("./routes/campgrounds");
+const reviews = require("./routes/reviews");
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
-  useNewUrlParser: true,
+  // All Three are Deprecated functions
+  // useNewUrlParser: true,
   // useCreateIndex: true,
-  useUnifiedTopology: true,
+  // useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
@@ -25,43 +29,39 @@ db.once("open", () => {
 const app = express();
 
 app.engine("ejs", ejsMate);
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
+const sessionConfig = {
+  secret: "challengeman",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    // In Milliseconds 1000 is seconds * Minutes * Hours * Days
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  next();
+});
+
 app.use("/campgrounds", campgrounds);
+app.use("/campgrounds/:id/reviews", reviews);
 
 app.get("/", (req, res) => {
   return res.render("home");
 });
 
-app.post(
-  "/:id/reviews",
-  catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id);
-    const review = new Review(req.body.review);
-    campground.reviews.push(review);
-    const rev = await review.save();
-    const camgro = await campground.save();
-    res.redirect(`/campgrounds/${campground._id}`);
-  })
-);
-
-app.delete(
-  "/:id/reviews/:reviewId",
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    const campground = await Campground.findByIdAndUpdate(id, {
-      $pull: { reviews: reviewId },
-    });
-    const reviews = await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/campgrounds/${id}`);
-  })
-);
-
-app.all("*", (req, res, next) => {
+app.all("/*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });
 
