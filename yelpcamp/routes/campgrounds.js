@@ -4,7 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/ExpressError");
 //
 const Campground = require("../models/campground");
-// const Review = require("../models/review");
+// // const Review = require("../models/review");
 
 router.get("/", async (req, res) => {
   const campgrounds = await Campground.find({});
@@ -34,6 +34,7 @@ router.get(
     );
     console.log(campground);
     return res.render("campgrounds/show", { campground });
+    return res.render("campgrounds/show", { campground });
   })
 );
 
@@ -41,6 +42,7 @@ router.get(
   "/:id/edit",
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
+    return res.render("campgrounds/edit", { campground });
     return res.render("campgrounds/edit", { campground });
   })
 );
