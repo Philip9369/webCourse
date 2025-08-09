@@ -19,10 +19,9 @@ userSchema.statics.findAndValidate = async function (username, password) {
 };
 
 userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
   this.password = await bcyrpt.hash(this.password, 12);
   next();
 });
-
-//   const hash = await bcyrpt.hash(password, 12);
 
 module.exports = mongoose.model("User", userSchema);

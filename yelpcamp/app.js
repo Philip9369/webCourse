@@ -9,6 +9,9 @@ const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const Campground = require("./models/campground");
 const Review = require("./models/review");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
 
 const campgrounds = require("./routes/campgrounds");
 const reviews = require("./routes/reviews");
@@ -49,10 +52,26 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
+});
+
+app.get("/fakeUser", async (req, res) => {
+  const user = new User({
+    email: "TrentonGreen686@gmail.com",
+    username: "TrentGreen",
+  });
+  const newUser = await User.register(user, "Green");
+  res.send(newUser);
 });
 
 app.use("/campgrounds", campgrounds);
