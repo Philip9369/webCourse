@@ -28,6 +28,17 @@ router.post(
   (req, res) => {
     req.flash("success", "Welcome Back!");
     res.redirect("/campgrounds");
-  }
+  },
 );
+
+router.get("/logout", (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "BYE BYE!!");
+    res.redirect("/campgrounds");
+  });
+});
+
 module.exports = router;

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 mongoose
   .connect("mongodb://localhost:27017/globalGameTest")
@@ -28,6 +29,21 @@ app.use(methodOverride("_method"));
 
 app.get("/home", (req, res) => {
   res.render("general/home");
+});
+
+app.put("/userAction", (req, res) => {
+  const action = req.body.action;
+
+  if (action === "Heal") {
+    // save logic
+  } else if (action === "Attack") {
+    // delete logic
+  } else if (action === "Defend") {
+    // update logic
+  }
+
+  console.log(action);
+  res.redirect("/home");
 });
 
 app.listen(3000, () => {

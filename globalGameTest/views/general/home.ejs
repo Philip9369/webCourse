@@ -1,2 +1,27 @@
 <% layout('./layouts/boilerplate') %>
 <h1 id="title" class="title">Welcome!</h1>
+<div id="actionTable">
+  <form action="/userAction?_method=PUT" method="post">
+    <button
+      class="btn"
+      id="btnDefend"
+      type="submit"
+      name="Defend"
+      value="Defend"
+    >
+      Defend
+    </button>
+    <button
+      class="btn"
+      id="btnAttack"
+      type="submit"
+      name="Attack"
+      value="Attack"
+    >
+      Attack
+    </button>
+    <button class="btn" id="btnHeal" type="submit" name="Heal" value="Heal">
+      Heal
+    </button>
+  </form>
+</div>
