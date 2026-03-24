@@ -6,9 +6,13 @@ const { isLoggedIn } = require("../middleware");
 const Campground = require("../models/campground");
 // // const Review = require("../models/review");
 
-router.get("/", async (req, res) => {
-  const campgrounds = await Campground.find({});
-  return res.render("campgrounds/index", { campgrounds });
+router.get("/", async (req, res, next) => {
+  try {
+    const campgrounds = await Campground.find({});
+    return res.render("campgrounds/index", { campgrounds });
+  } catch (e) {
+    next(e);
+  }
 });
 
 router.get("/new", isLoggedIn, (req, res) => {
@@ -29,6 +33,7 @@ router.post(
 
 router.get(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id).populate(
       "reviews",
