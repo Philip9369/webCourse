@@ -23,10 +23,12 @@
                     </li>
                     <li class="list-group-item">
                         <a class="btn btn-secondary" href="/campgrounds">Back to All</a>
+                            <% if(currentUser && campground.author.equals(currentUser._id)){ %>
                         <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
                         <form action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>
                         </form>
+                        <% } %>
                     </li>
                 </ul>
                 <div class="card-footer text-muted">

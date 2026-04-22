@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/ExpressError");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, isAuthor } = require("../middleware");
 const Campground = require("../models/campground");
-// // const Review = require("../models/review");
+// const Review = require("../models/review");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -50,6 +50,7 @@ router.get(
 
 router.get(
   "/:id/edit",
+  isAuthor,
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
     if (!campground) {
@@ -63,7 +64,6 @@ router.get(
 router.put(
   "/:id",
   catchAsync(async (req, res) => {
-    const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, {
       ...req.body.campground,
     });
